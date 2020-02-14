@@ -25,7 +25,7 @@ SECRET_KEY = '@gx0#p0ft_ca4$st@zc)s^ae(gpuek@*jd875%+o2q85r6_za4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,16 +74,40 @@ WSGI_APPLICATION = 'Custom_Use_Models.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+# This one is the Default sqlite DB
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
+# This one is the Some Additional DB
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'anjani',
+        'USER': 'anjani',
+        'PASSWORD': 'PASSWORD',
+        'HOST': 'www.FakeHost.com',
+        'PORT': '5432',
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -109,9 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # python3.8 manage.py makemigrations
 # AUTH_USER_MODEL = "[app name with the model].User"
 AUTH_USER_MODEL = 'Dummy_App.User'
-
-
-
 
 LANGUAGE_CODE = 'en-us'
 
