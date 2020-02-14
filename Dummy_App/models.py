@@ -29,7 +29,6 @@ class Employee(TimeStampedModel):
 class User(AbstractBaseUser):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100, blank=True)
-    status = models.ForeignKey(Status, blank=True, null=True, on_delete=models.SET_DEFAULT, default="")
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
