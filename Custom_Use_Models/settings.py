@@ -78,26 +78,26 @@ WSGI_APPLICATION = 'Custom_Use_Models.wsgi.application'
 # This one is the Default sqlite DB
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     }
+}
 
 
 # This one is the Some Additional DB
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'anjani',
-        'USER': 'anjani',
-        'PASSWORD': 'PASSWORD',
-        'HOST': 'www.FakeHost.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'anjani',
+#         'USER': 'anjani',
+#         'PASSWORD': 'PASSWORD',
+#         'HOST': 'www.FakeHost.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
