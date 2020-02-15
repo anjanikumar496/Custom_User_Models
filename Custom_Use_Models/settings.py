@@ -25,13 +25,48 @@ SECRET_KEY = '@gx0#p0ft_ca4$st@zc)s^ae(gpuek@*jd875%+o2q85r6_za4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+BASE_URL = "localhost:8000"
+
 ALLOWED_HOSTS = ['*']
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'content-type',
+]
+
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'Dummy_App',
+    'rest_framework',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +74,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'Custom_Use_Models.urls'
 
@@ -78,26 +115,26 @@ WSGI_APPLICATION = 'Custom_Use_Models.wsgi.application'
 # This one is the Default sqlite DB
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     }
+}
 
 
 # This one is the Some Additional DB
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'anjani',
-        'USER': 'anjani',
-        'PASSWORD': 'PASSWORD',
-        'HOST': 'www.FakeHost.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'anjani',
+#         'USER': 'anjani',
+#         'PASSWORD': 'PASSWORD',
+#         'HOST': 'www.FakeHost.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -130,6 +167,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1200),
+}
+
 # python3.8 manage.py makemigrations
 # AUTH_USER_MODEL = "[app name with the model].User"
 AUTH_USER_MODEL = 'Dummy_App.User'
@@ -149,3 +198,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CUSTOM_SESSION = {}
+
+try:
+    from . local_settings import *
+except:
+    pass
+
+
+
+
+
